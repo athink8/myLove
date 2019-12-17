@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript" src="canvas_bg.js"></script>
+		<script>
+			$(function() {
+
+				setInterval(function() {
+					let nTime = new Date();
+					let dTime = dateDiff(nTime).toFixed(13);
+					// console.log(formartDate(nTime));
+					// console.log("时间差：" + dTime);
+					$("#sTime").html("开始时间: "+"2019-11-24 00:00:00");
+					$("#nTime").html("当前时间: "+formartDate(nTime));
+					$("#dTime").html("相爱时间: "+dTime+"天");
+				}, 1000)
+
+				function dateDiff(nTime,sTime) {
+					if(sTime==null||sTime==""){
+						sTime = "2019-11-24 0:0:0";
+					}
+					let day1 = new Date(sTime).getTime();
+					iDays = (nTime.getTime() - day1) / (1000 * 60 * 60 * 24);
+					return iDays
+				};
+				
+				/*格式化时间  */
+				function formartDate(mTime) {
+					var mYear = mTime.getFullYear();
+					var mMonth = mTime.getMonth() + 1;
+					var mDate = mTime.getDate();
+					var mHours = mTime.getHours();
+					var mMinutes = mTime.getMinutes();
+					var mSeconds = mTime.getSeconds();
+					if (mMinutes < 10) {
+						mMinutes = "0" + mMinutes
+					}
+					if (mSeconds < 10) {
+						mSeconds = "0" + mSeconds
+					}
+					return mYear + "-" + mMonth + "-" + mDate + "  " + mHours + ":" + mMinutes + ":" + mSeconds;
+				}
+			})
+		</script>
+		<style>
+			*{
+				cursor: pointer;
+			}
+			body{
+				background-color: beige;
+			}
+			#div1{
+				text-align: center;
+				position: relative;
+				top: 66px;
+			}
+			.loveName{
+				color: red;
+				font-weight: bold;
+				font-size: 55px;
+				height: 120px;
+			}
+			.lTime{
+				/* width: 35%; */
+				margin: 0 auto;
+				text-align: center;
+				font-size: 30px;
+				color: #0FCECE;
+			}
+			#author{
+				position: absolute;
+				left: 75%;
+				top: 75%;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="c" style="position: absolute;z-index: -1;text-align: center;top: -20px;left: -20px;"></canvas>
+		<div id="div1">
+			<div class="loveName">a ❤ b</div>
+			<div id="loveTime" class="loveTime">
+				<div id="sTime" class="lTime"></div><br />
+				<div id="nTime" class="lTime"></div><br />
+				<div id="dTime" class="lTime"></div><br />
+			</div>
+		</div>
+		<footer id="author">
+			<p>@Athink</p>
+			<p>今天天气不错</p>
+		</footer>
+	</body>
+</html>
